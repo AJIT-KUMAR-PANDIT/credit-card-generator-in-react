@@ -1,7 +1,9 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Body from "./components/Body/Body";
-import Card from "./components/Card/Card";
+import FrontCardPos from "./components/Card/FrontCardPos";
+import BackCardPos from "./components/Card/BackCardPos";
+import React, { useState } from 'react';
 
 function App() {
   return (
@@ -9,8 +11,11 @@ function App() {
       <div className="BodyPos">
         <Body />
       </div>
-      <div className="CardPos">
-        <Card />
+      <div className="FrontCardPos">
+        <FrontCardPos />
+      </div>
+      <div className="BackCardPos">
+        <BackCardPos />
       </div>
     </>
   );

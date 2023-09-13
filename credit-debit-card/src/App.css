@@ -2,7 +2,7 @@
 text-align: center;
 }
 
-.CardPos{
+.FrontCardPos{
   position: absolute;
   z-index: 2;
   top: 10vh;
@@ -12,4 +12,11 @@ text-align: center;
 .BodyPos{
   position: relative;
   z-index: -1;
+}
+
+.BackCardPos{
+  position: absolute;
+  z-index: 2;
+  top: 381px;
+  left: 191px;
 }

@@ -1,7 +1,7 @@
 import './Card.css';
 
 
-function Card() {
+function FrontCardPos() {
   return (
     <>
       <div className='frontCard'>
@@ -11,4 +11,4 @@ function Card() {
   );
 }
 
-export default Card;
+export default FrontCardPos;
