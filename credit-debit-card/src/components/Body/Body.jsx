@@ -1,5 +1,6 @@
 // src/App.js
 import "./Body.css";
+import Form from '../Form/Form'
 
 function Body() {
   return (
@@ -9,7 +10,7 @@ function Body() {
 
         </div>
         <div className="rightSidePart">
-            
+              <Form/>
         </div>
       </div>
     </>
