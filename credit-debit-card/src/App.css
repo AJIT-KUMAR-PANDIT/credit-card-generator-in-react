@@ -17,6 +17,6 @@ text-align: center;
 .BackCardPos{
   position: absolute;
   z-index: 2;
-  top: 381px;
-  left: 191px;
+  bottom: 1vh;
+  left: 15vw;
 }
