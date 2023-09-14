@@ -105,6 +105,8 @@ flex-shrink: 0;
   
   position: relative;
   top: 70%;
+  left:24px;
+ width:316px;
 }
 
 .Cvv_Pos{
