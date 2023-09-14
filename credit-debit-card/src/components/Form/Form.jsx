@@ -34,10 +34,10 @@ function Form() {
             </label>
             <br />
             <input
-              type="number"
+              type="text"
               id="Month"
               className="Flx1"
-              value="e.g. 1234 5678 9123 0000"
+              value="MM"
             />
           </div>
           <div>
@@ -47,10 +47,10 @@ function Form() {
             </label>
             <br/>
             <input
-              type="number"
+              type="text"
               id="Year"
               className="Flx2"
-              value="e.g. 1234 5678 9123 0000"
+              value="YY"
             />
           </div>
           <div>
@@ -59,7 +59,7 @@ function Form() {
             </label>
             <br/>
             <input
-              type="number"
+              type="text"
               id="Cvv"
               className="Flx3"
               value="e.g. 123"

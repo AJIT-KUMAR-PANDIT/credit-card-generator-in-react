@@ -34,6 +34,8 @@ height: 267.585px;
 .frontCard {
   background-image: url("../images/Rectangle 27.png");
   background-size: cover;
+  display: flex;
+  justify-content: center;
 }
 
 
@@ -45,5 +47,78 @@ flex-shrink: 0;
 
   background-image: url("../images/Group 6.svg");
   background-size: cover;
+
+  display: flex;
+  align-items: center;
 }
 
+.CardNo{
+  color: #FFF;
+  font-family: Inter;
+  font-size: 1.625rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.2925rem;
+
+  width: 22.9375rem;
+height: 1.6875rem;
+flex-shrink: 0;
+text-align: center;
+
+position: relative;
+top: 60%;
+
+}
+
+.CardUserNam{
+  color: #FFF;
+  font-family: Roboto;
+  font-size: 0.8125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.15438rem;
+
+  width: 9.6875rem;
+height: 0.6875rem;
+flex-shrink: 0;
+}
+
+.Card-Date{
+  color: #FFF;
+  font-family: Roboto;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.20563rem;
+
+  width: 3.1875rem;
+height: 0.8125rem;
+flex-shrink: 0;
+}
+
+.Card_Position{
+  display: flex;
+	justify-content: space-between;
+  
+  position: relative;
+  top: 70%;
+}
+
+.Cvv_Pos{
+  color: #FFF;
+font-family: Roboto;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: 0.20563rem;
+
+width: 2.0625rem;
+height: 0.79319rem;
+flex-shrink: 0;
+position: relative;
+right: -71%;
+}
