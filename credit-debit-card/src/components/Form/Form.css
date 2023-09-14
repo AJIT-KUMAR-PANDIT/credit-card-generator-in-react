@@ -19,11 +19,23 @@
 .form-input {
   border-radius: 0.375rem;
   border: 1px solid rgba(0, 0, 0, 0.13);
-  background: #fff;
 
   width: 23.875rem;
   height: 2.75rem;
   flex-shrink: 0;
+
+  border-radius: 6px;
+  border: 3px solid rgba(0, 0, 0, 0.13);
+  background: #ffffff00;
+
+  /* text */
+  color: #bbb9bc;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1.875px;
 }
 
 .Flx {
@@ -34,11 +46,23 @@
 .Flx1 {
   border-radius: 0.375rem;
   border: 1px solid rgba(0, 0, 0, 0.13);
-  background: #fff;
 
   width: 4.875rem;
   height: 2.75rem;
   flex-shrink: 0;
+
+  border-radius: 6px;
+  border: 3px solid rgba(0, 0, 0, 0.13);
+  background: #ffffff00;
+
+  /* text */
+  color: #bbb9bc;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1.875px;
 }
 
 .Flx2 {
@@ -47,7 +71,19 @@
   flex-shrink: 0;
   border-radius: 0.375rem;
   border: 1px solid rgba(0, 0, 0, 0.13);
-  background: #fff;
+
+  border-radius: 6px;
+  border: 3px solid rgba(0, 0, 0, 0.13);
+  background: #ffffff00;
+
+  /* text */
+  color: #bbb9bc;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1.875px;
 }
 
 .Flx3 {
@@ -56,7 +92,19 @@
   flex-shrink: 0;
   border-radius: 0.375rem;
   border: 1px solid rgba(0, 0, 0, 0.13);
-  background: #fff;
+
+  border-radius: 6px;
+  border: 3px solid rgba(0, 0, 0, 0.13);
+  background: #ffffff00;
+
+  /* text */
+  color: #bbb9bc;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1.875px;
 }
 
 .Form-Button {
