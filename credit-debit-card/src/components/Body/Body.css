@@ -16,3 +16,9 @@
     overflow: hidden;
 }
 
+.Cent_er{
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    transform: translate(-50%, -65%);
+}
