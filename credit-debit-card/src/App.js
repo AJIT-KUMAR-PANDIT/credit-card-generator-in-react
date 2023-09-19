@@ -4,6 +4,8 @@ import Body from "./components/Body/Body";
 import FrontCardPos from "./components/Card/FrontCardPos";
 import BackCardPos from "./components/Card/BackCardPos";
 import React, { useState } from 'react';
+import Form from "./components/Form/Form";
+
 
 function App() {
   return (
@@ -16,6 +18,9 @@ function App() {
       </div>
       <div className="BackCardPos">
         <BackCardPos />
+      </div>
+      <div className="Cent_er">
+        <Form />
       </div>
     </>
   );
