@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import "./Form.css";
+import { useContext } from "react";
+import { CardContext } from "./../../App";
 
 function Form() {
+  // context api
+  const { setcardHolderNameShow } = useContext(CardContext);
+  const { setcardNumberShow } = useContext(CardContext);
+  const { setMonthShow } = useContext(CardContext);
+  const { setYearShow } = useContext(CardContext);
+  const { setCvvNumberShow } = useContext(CardContext);
+
   const [userName, setuserName] = useState("");
   const [CardNumber, setCardNumber] = useState("");
   const [Month, setMonth] = useState("");
@@ -10,9 +19,13 @@ function Form() {
   const [textColor, setTextColor] = useState("grey");
   const [error, setError] = useState(false);
 
+  const [txt, setTxt] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setTextColor(e.target.value ? "grey" : "grey");
+
+    console.log(userName);
 
     // error handling
     if (userName === "") {
@@ -25,10 +38,28 @@ function Form() {
       setError("Year required");
     } else if (Cvv === "") {
       setError("Cvv required");
-    }else {
+    } else {
       setError("");
     }
+    // function to update card details
+    update();
   };
+
+  function update() {
+    // updating credit card details
+if(checkAlpha()){
+    setcardHolderNameShow(userName);
+}
+    setcardNumberShow(CardNumber);
+    setMonthShow(Month);
+    setYearShow(Year);
+    setCvvNumberShow(Cvv);
+  }
+
+  function checkAlpha() {
+    const regex = /[a-zA-Z ]+$/;
+    return (regex.test(userName));
+  }
 
   return (
     <>
@@ -45,8 +76,10 @@ function Form() {
           style={{ color: textColor }}
           onChange={(e) => setuserName(e.target.value)}
         />
-        {error}
-        <label className="error">Cardholder name required</label>
+        {userName.length < 1 || userName.length > 31 || !checkAlpha() ? (
+          <label className="error">Cardholder name required</label>
+        ) : null}
+        {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
         <div>
           <br />
         </div>
@@ -59,7 +92,10 @@ function Form() {
           placeholder="e.g. 1234 5678 9123 0000"
           onChange={(e) => setCardNumber(e.target.value)}
         />
-        <label className="error">Card number required</label>
+        {error && CardNumber.length != 16 ? (
+          <label className="error">{error}</label>
+        ) : null}
+        {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
         <br /> <br />
         <div className="Flx">
           <div>
@@ -87,6 +123,8 @@ function Form() {
             <label className="error">Year required</label>
           </div>
           <div>
+            {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
+
             <label className="form-label">CVC</label>
             <br />
             <input
@@ -100,10 +138,13 @@ function Form() {
           </div>
         </div>
         <br />
+        {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
         <button type="submit" value="Submit" className="Form-Button">
           Confirm
         </button>
       </form>
+
+      {/* { false&&<App name1={userName} />} */}
     </>
   );
 }
