@@ -16,14 +16,10 @@ function Form() {
   const [Month, setMonth] = useState("");
   const [Year, setYear] = useState("");
   const [Cvv, setCvv] = useState("");
-  const [textColor, setTextColor] = useState("grey");
   const [error, setError] = useState(false);
-
-  const [txt, setTxt] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTextColor(e.target.value ? "grey" : "grey");
 
     console.log(userName);
 
@@ -47,10 +43,15 @@ function Form() {
 
   function update() {
     // updating credit card details
-if(checkAlpha()){
-    setcardHolderNameShow(userName);
-}
-    setcardNumberShow(CardNumber);
+    if (checkAlpha()) {
+      setcardHolderNameShow(userName);
+    }
+    if (checkCardNumber()) {
+      
+     const regex = new RegExp(`.{1,${4}}`, 'g');
+     setcardNumberShow(CardNumber.match(regex).join(' '));
+     
+    }
     setMonthShow(Month);
     setYearShow(Year);
     setCvvNumberShow(Cvv);
@@ -58,9 +59,12 @@ if(checkAlpha()){
 
   function checkAlpha() {
     const regex = /[a-zA-Z ]+$/;
-    return (regex.test(userName));
+    return regex.test(userName);
   }
 
+  function checkCardNumber() {
+    return CardNumber.length === 16;
+  }
   return (
     <>
       <form className="FormCenter" onSubmit={handleSubmit}>
@@ -73,10 +77,9 @@ if(checkAlpha()){
           id="CardHolderName"
           className="form-input"
           placeholder="e.g. Jane Appleseed"
-          style={{ color: textColor }}
           onChange={(e) => setuserName(e.target.value)}
         />
-        {userName.length < 1 || userName.length > 31 || !checkAlpha() ? (
+        {error && (userName.length < 1 || !checkAlpha()) ? (
           <label className="error">Cardholder name required</label>
         ) : null}
         {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
@@ -89,12 +92,15 @@ if(checkAlpha()){
           type="number"
           id="CardNumber"
           className="form-input"
+          // maxLength={16}
+          maxlength="10"
           placeholder="e.g. 1234 5678 9123 0000"
           onChange={(e) => setCardNumber(e.target.value)}
+          value={CardNumber}
         />
-        {error && CardNumber.length != 16 ? (
-          <label className="error">{error}</label>
-        ) : null}
+        {!checkCardNumber ? null : (
+          <label className="error">Card number required</label>
+        )}
         {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
         <br /> <br />
         <div className="Flx">
@@ -143,8 +149,6 @@ if(checkAlpha()){
           Confirm
         </button>
       </form>
-
-      {/* { false&&<App name1={userName} />} */}
     </>
   );
 }
