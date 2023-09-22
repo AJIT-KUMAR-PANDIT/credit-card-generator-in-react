@@ -188,7 +188,7 @@ function Form() {
             .replace(/(\d{4})/g, "$1 ")
             .trim()}
         />
-        {error && CardNumber.length === 16 ? (
+        {error && CardNumber.length <19? (
           <label className="error">Card Number Invaild</label>
         ) :null}
         {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
@@ -206,7 +206,7 @@ function Form() {
               value={Month.replace(/[^0-9]/g, "")}
               onChange={(e) => setMonth(e.target.value)}
             />
-           {error && Month.length < 2 && Month > 12 ? (
+           {(error && Month.length < 1 && Month > 12) ? (
               <label className="error">Month invaild</label>
             ) : null}
             {/* ===============================================================        */}
