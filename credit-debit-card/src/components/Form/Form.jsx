@@ -46,12 +46,13 @@ function Form() {
     if (checkAlpha()) {
       setcardHolderNameShow(userName);
     }
-    if (checkCardNumber()) {
+    // if (checkCardNumber()) {
       
-     const regex = new RegExp(`.{1,${4}}`, 'g');
-     setcardNumberShow(CardNumber.match(regex).join(' '));
+    //  const regex = new RegExp(`.{1,${4}}`, 'g');
+    //  setcardNumberShow(CardNumber.match(regex).join(' '));
      
-    }
+    // }
+    setcardNumberShow(CardNumber);
     setMonthShow(Month);
     setYearShow(Year);
     setCvvNumberShow(Cvv);
@@ -63,7 +64,20 @@ function Form() {
   }
 
   function checkCardNumber() {
-    return CardNumber.length === 16;
+    return CardNumber.length === 19;
+  }
+  function checkMonth(Month) {
+    if(Month>=1 && Month<=12) {
+      return true;
+    }
+  }
+  function checkYear() {
+    if(Year>=23) {
+      return true;
+    }
+  }
+  function checkCvv() {
+    return Cvv.length === 3;
   }
   return (
     <>
@@ -77,6 +91,7 @@ function Form() {
           id="CardHolderName"
           className="form-input"
           placeholder="e.g. Jane Appleseed"
+          value={userName.replace(/[^a-zA-Z ]/g, '')}
           onChange={(e) => setuserName(e.target.value)}
         />
         {error && (userName.length < 1 || !checkAlpha()) ? (
@@ -89,16 +104,20 @@ function Form() {
         <label className="form-label">CARD NUMBER</label>
         <br />
         <input
-          type="number"
+          type="text"
           id="CardNumber"
           className="form-input"
-          // maxLength={16}
-          maxlength="10"
           placeholder="e.g. 1234 5678 9123 0000"
           onChange={(e) => setCardNumber(e.target.value)}
-          value={CardNumber}
+          // value={CardNumber}
+          maxLength={19}
+          value={CardNumber
+            .replace(/[^0-9]/g, '')
+            .replace(/\s/g, '')
+            .replace(/(\d{4})/g, '$1 ')
+            .trim()}
         />
-        {!checkCardNumber ? null : (
+    {(error && checkCardNumber() ) ? null : (
           <label className="error">Card number required</label>
         )}
         {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
@@ -108,25 +127,35 @@ function Form() {
             <label className="form-label">EXP.DATE</label>
             <br />
             <input
-              type="number"
+              type="text"
               id="Month"
               className="Flx1"
               placeholder="MM"
+              maxLength={2}
+              value={Month.replace(/[^0-9]/g, '')}
               onChange={(e) => setMonth(e.target.value)}
             />
-            <label className="error">Month required</label>
+            {error && checkMonth() ? null : (
+          <label className="error">Month required</label>
+        )}
+     {/* ===============================================================        */}
           </div>
           <div>
             <label className="form-label">(MM/YY)</label>
             <br />
             <input
-              type="number"
+              type="text"
               id="Year"
               className="Flx2"
               placeholder="YY"
+              maxLength={2}
+              value={Year.replace(/[^0-9]/g, '')}
               onChange={(e) => setYear(e.target.value)}
             />
-            <label className="error">Year required</label>
+            {error && checkYear() ? null : (
+           <label className="error">Year required</label>
+        )}
+           
           </div>
           <div>
             {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
@@ -134,13 +163,18 @@ function Form() {
             <label className="form-label">CVC</label>
             <br />
             <input
-              type="number"
+              type="text"
               id="Cvv"
               className="Flx3"
               placeholder="e.g. 123"
+              maxLength={3}
+              value={Cvv.replace(/[^0-9]/g, '')}
               onChange={(e) => setCvv(e.target.value)}
             />
-            <label className="error">CVC must be numeric</label>
+            {error && checkCvv() ? null : (
+          <label className="error">CVC must be numeric</label>
+        )}
+           
           </div>
         </div>
         <br />
