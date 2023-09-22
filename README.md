@@ -13,8 +13,6 @@ THIS is the Link of Micro Project1 React https://credit-card-generator-in-react.
 
 # Credit Card Generator
 
-Figma Link: https://www.figma.com/file/qF95ujN41KS68FlR7onxFo/elements?node-id=0%3A1&t=M1pQXgFUiKwHeH2s-0
-
 Your challenge is to build out this interactive card details form and get it looking as close to the design as possible.
 
 Your users should be able to:
