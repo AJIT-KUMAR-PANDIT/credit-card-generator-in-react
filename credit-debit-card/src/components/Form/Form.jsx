@@ -69,17 +69,17 @@ function Form() {
       userName.length <= 0 ||
       CardNumber.length === 0 ||
       CardNumber.length < 19 ||
-      Month.length === 0 ||
-      Month.length < 2 ||
       Year.length === 0 ||
       Year.length < 2 ||
       Cvv.length === 0 ||
-      Cvv.length < 3
-      || (!checkAlpha()) 
-      || (!checkCardNumber()) 
-      || (!checkMonth()) 
-      || (!checkYear()) 
-      || (!checkCvv())
+      Cvv.length < 3 ||
+      Month <= 0 ||
+       Month > 12||
+      !checkAlpha() ||
+      !checkCardNumber() ||
+      !checkMonth() ||
+      !checkYear() ||
+      !checkCvv()
     ) {
       setError(true);
     } else {
@@ -95,7 +95,7 @@ function Form() {
     ) {
       update();
       notifySuccess();
-    }else{
+    } else {
       // setError(true);
       notifyError();
     }
@@ -115,7 +115,7 @@ function Form() {
     if (checkCardNumber()) {
       setcardNumberShow(CardNumber);
     }
-    if (checkMonth(Month)) {
+    if (checkMonth()) {
       setMonthShow(Month);
     }
     if (checkYear()) {
@@ -140,7 +140,7 @@ function Form() {
     }
   }
   function checkMonth() {
-    if (Month >= 1 && Month <= 12) {
+    if (Month > 0 && Month <= 12) {
       return true;
     }
   }
@@ -169,7 +169,7 @@ function Form() {
         />
         {error && userName.length <= 0 ? (
           <label className="error">CardHolder Name required</label>
-        ) : null }
+        ) : null}
         {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
         <div>
           <br />
@@ -188,9 +188,9 @@ function Form() {
             .replace(/(\d{4})/g, "$1 ")
             .trim()}
         />
-        {error && CardNumber.length <19? (
+        {error && CardNumber.length < 19 ? (
           <label className="error">Card Number Invaild</label>
-        ) :null}
+        ) : null}
         {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
         <br /> <br />
         <div className="Flx">
@@ -206,7 +206,7 @@ function Form() {
               value={Month.replace(/[^0-9]/g, "")}
               onChange={(e) => setMonth(e.target.value)}
             />
-           {(error && Month.length < 1 && Month > 12) ? (
+            {(error && (Month <= 0 || Month >= 12)) ? (
               <label className="error">Month invaild</label>
             ) : null}
             {/* ===============================================================        */}
@@ -223,7 +223,7 @@ function Form() {
               value={Year.replace(/[^0-9]/g, "")}
               onChange={(e) => setYear(e.target.value)}
             />
-            {error && Year.length < 2 && Year<23? (
+            {error && Year.length < 2 && Year < 23 ? (
               <label className="error">Year invaild</label>
             ) : null}
           </div>
@@ -244,7 +244,7 @@ function Form() {
             {error && Cvv.length < 3 ? (
               <label className="error">CVC must be 3 Digit</label>
             ) : (
-              ''
+              ""
             )}
           </div>
         </div>
