@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Form() {
-  const notify = () => {
+  const notifySuccess = () => {
     toast.success("Credit Card Details Successfully Updated !", {
       position: "top-center",
       autoClose: 5000,
@@ -19,6 +19,18 @@ function Form() {
     });
   };
 
+  const notifyError = () => {
+    toast.error("Error Updating Credit Card Details", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
   // context api
   const { setcardHolderNameShow } = useContext(CardContext);
   const { setcardNumberShow } = useContext(CardContext);
@@ -39,23 +51,53 @@ function Form() {
     console.log(userName);
 
     // error handling
-    if (userName === "") {
-      setError(true);
-    } else if (CardNumber === "") {
-      setError(true);
-    } else if (Month === "") {
-      setError(true);
-    } else if (Year === "") {
-      setError(true);
-    } else if (Cvv === "") {
+    // if (userName === "") {
+    //   setError(true);
+    // } else if (CardNumber === "") {
+    //   setError(true);
+    // } else if (Month === "") {
+    //   setError(true);
+    // } else if (Year === "") {
+    //   setError(true);
+    // } else if (Cvv === "") {
+    //   setError(true);
+    // } else {
+    //   setError(false);
+    // }
+    if (
+      userName.length === 0 ||
+      userName.length <= 0 ||
+      CardNumber.length === 0 ||
+      CardNumber.length < 19 ||
+      Month.length === 0 ||
+      Month.length < 2 ||
+      Year.length === 0 ||
+      Year.length < 2 ||
+      Cvv.length === 0 ||
+      Cvv.length < 3
+      || (!checkAlpha()) 
+      || (!checkCardNumber()) 
+      || (!checkMonth()) 
+      || (!checkYear()) 
+      || (!checkCvv())
+    ) {
       setError(true);
     } else {
-      setError("");
+      setError(false);
     }
     // function to update card details
-    if(checkAlpha()&&checkCardNumber()&&checkMonth()&&checkYear()&&checkCvv()){
-     update();
-     notify();
+    if (
+      checkAlpha() &&
+      checkCardNumber() &&
+      checkMonth() &&
+      checkYear() &&
+      checkCvv()
+    ) {
+      update();
+      notifySuccess();
+    }else{
+      // setError(true);
+      notifyError();
     }
   };
 
@@ -85,7 +127,6 @@ function Form() {
     // setMonthShow(Month);
     // setYearShow(Year);
     // setCvvNumberShow(Cvv);
-   
   }
 
   function checkAlpha() {
@@ -126,9 +167,9 @@ function Form() {
           value={userName.replace(/[^a-zA-Z ]/g, "")}
           onChange={(e) => setuserName(e.target.value)}
         />
-        {error && (userName.length < 1 || !checkAlpha()) ? (
-          <label className="error">Cardholder name required</label>
-        ) : null}
+        {error && userName.length <= 0 ? (
+          <label className="error">CardHolder Name required</label>
+        ) : null }
         {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
         <div>
           <br />
@@ -147,9 +188,9 @@ function Form() {
             .replace(/(\d{4})/g, "$1 ")
             .trim()}
         />
-        {error && checkCardNumber() ? null : (
-          <label className="error">Card number required</label>
-        )}
+        {error && CardNumber.length === 16 ? (
+          <label className="error">Card Number Invaild</label>
+        ) :null}
         {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
         <br /> <br />
         <div className="Flx">
@@ -165,9 +206,9 @@ function Form() {
               value={Month.replace(/[^0-9]/g, "")}
               onChange={(e) => setMonth(e.target.value)}
             />
-            {error && checkMonth() ? null : (
-              <label className="error">Month required</label>
-            )}
+           {error && Month.length < 2 && Month > 12 ? (
+              <label className="error">Month invaild</label>
+            ) : null}
             {/* ===============================================================        */}
           </div>
           <div>
@@ -182,9 +223,9 @@ function Form() {
               value={Year.replace(/[^0-9]/g, "")}
               onChange={(e) => setYear(e.target.value)}
             />
-            {error && checkYear() ? null : (
-              <label className="error">Year required</label>
-            )}
+            {error && Year.length < 2 && Year<23? (
+              <label className="error">Year invaild</label>
+            ) : null}
           </div>
           <div>
             {/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
@@ -200,8 +241,10 @@ function Form() {
               value={Cvv.replace(/[^0-9]/g, "")}
               onChange={(e) => setCvv(e.target.value)}
             />
-            {error && checkCvv() ? null : (
-              <label className="error">CVC must be numeric</label>
+            {error && Cvv.length < 3 ? (
+              <label className="error">CVC must be 3 Digit</label>
+            ) : (
+              ''
             )}
           </div>
         </div>
@@ -211,7 +254,7 @@ function Form() {
           type="submit"
           value="Submit"
           className="Form-Button"
-      onClick={ handleSubmit}
+          onClick={handleSubmit}
         >
           Confirm
         </button>
